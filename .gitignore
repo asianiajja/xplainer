@@ -14,5 +14,5 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-'config/*.yml' 
-'Gemfile.lock' 
+config/*.yml
+Gemfile.lock
