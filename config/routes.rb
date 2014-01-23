@@ -1,4 +1,6 @@
 Xplainer::Application.routes.draw do
+  resources :lectures
+
   devise_for :users
   resources :users
 
