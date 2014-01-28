@@ -68,7 +68,7 @@ class TopicsController < ApplicationController
     respond_to do |format|
       if @comm.save
         format.html { redirect_to @topic }
-        format.js   { render :action => "update_topic" }
+        format.js   { render :action => "clear_comm" }
         format.json { render json: @topic, location: @topic }
       else
         format.html { render action: 'new' }
