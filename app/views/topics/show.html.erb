@@ -1,24 +1,10 @@
-<script>
-function doUpdate() {
-	<% if @topic.editor.id == current_user.id %>
-	tinyMCE.triggerSave();
-	$('form#edit_topic').submit();
-	<% else %>
-      $.ajax({
-        type: "GET",
-        url: "/topics/<%=@topic.id %>",
-        dataType: "script"
-      });
-	<% end %>
-}
-setInterval(function(){doUpdate()}, 5000);
-</script>
 <p id="notice"><%= notice %></p>
 <h2><%= @topic.name %></h2>
 <div id="explain">
 <div id="board">
 	<% if @topic.editor.id == current_user.id %>
-	<%= tinymce_assets %>
+	<% #tinymce_assets 
+	%>
 		<%= form_for(@topic, :as => :topic, url: url_for(:action => 'explain'), remote: true) do |f| %>
 			<div class="field">
 			 <%= f.text_area :content, size: '85x26', :class => "tinymce" %>
@@ -50,3 +36,20 @@ setInterval(function(){doUpdate()}, 5000);
 	</p>
 </div>
 </div>
+<script>
+function doUpdate() {
+	<% if @topic.editor.id == current_user.id %>
+	//if(tinyMCE != undefined)
+		tinyMCE.triggerSave();
+	if($('form#edit_topic').length)
+		$('form#edit_topic').submit();
+	<% else %>
+      $.ajax({
+        type: "GET",
+        url: "/topics/<%=@topic.id %>",
+        dataType: "script"
+      });
+	<% end %>
+}
+$( document ).ready (function(){setInterval(function(){doUpdate()}, 3000);});
+</script>
