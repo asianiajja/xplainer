@@ -1,10 +1,8 @@
-<h1>Listing lectures</h1>
+<h2>Online sessions</h2>
 
 <table>
   <thead>
     <tr>
-      <th></th>
-      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -12,9 +10,7 @@
   <tbody>
     <% @lectures.each do |lecture| %>
       <tr>
-        <td><%= link_to 'Show', lecture %></td>
-        <td><%= link_to 'Edit', edit_lecture_path(lecture) %></td>
-        <td><%= link_to 'Destroy', lecture, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to lecture.name, lecture, {:class => "attend_link"} %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +18,4 @@
 
 <br>
 
-<%= link_to 'New Lecture', new_lecture_path %>
+<%= link_to 'Start new session!', new_lecture_path, { class: 'big_link' } %>

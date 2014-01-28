@@ -1,0 +1,5 @@
+document.getElementById('c_list').innerHTML = '<%= escape_javascript(render 'comments') %>';
+document.getElementById('comment_content').value = '';
+<% if @topic.editor.id != current_user.id %>
+document.getElementById('board').innerHTML = '<%= escape_javascript(render 'board') %>';
+<% end %>

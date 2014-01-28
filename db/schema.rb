@@ -11,19 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140124072810) do
+ActiveRecord::Schema.define(version: 20140125124334) do
 
   create_table "comments", force: true do |t|
     t.text     "content"
+    t.integer  "user_id",    null: false
+    t.integer  "topic_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "explanations", force: true do |t|
+    t.integer  "user_id",                    null: false
+    t.integer  "topic_id",                   null: false
+    t.boolean  "author",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "lectures", force: true do |t|
-    t.string   "name",       default: "",   null: false
-    t.integer  "version",    default: 1,    null: false
-    t.boolean  "public",     default: true, null: false
-    t.string   "password"
+    t.string   "name",               default: "",   null: false
+    t.integer  "version",            default: 1,    null: false
+    t.boolean  "public",             default: true, null: false
+    t.string   "encrypted_password"
+    t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,20 +43,33 @@ ActiveRecord::Schema.define(version: 20140124072810) do
     t.integer  "user_id",                    null: false
     t.integer  "lecture_id",                 null: false
     t.boolean  "online",     default: false, null: false
+    t.boolean  "creator",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "questions", force: true do |t|
     t.text     "content"
+    t.integer  "lecture_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "supports", force: true do |t|
+    t.integer  "question_id",                 null: false
+    t.integer  "user_id",                     null: false
+    t.boolean  "answered",    default: false, null: false
+    t.boolean  "creator",     default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "topics", force: true do |t|
-    t.string   "name",       default: "", null: false
-    t.text     "content",    default: "", null: false
-    t.integer  "version",    default: 1,  null: false
+    t.string   "name",        default: "", null: false
+    t.text     "content",     default: "", null: false
+    t.integer  "version",     default: 1,  null: false
+    t.integer  "lecture_id",               null: false
+    t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Xplainer</title>
+  <title>xPlainer - your place for collective studying</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-<%= yield %>
-
+  <div id="site">
+    <div id="header">
+      <div id="logo">
+        <h1><%= link_to 'xPlainer', root_url %></h1>
+      </div>
+      <div id="sub_logo">
+        Your place for collective studying.
+      </div>
+      <div id="user_panel">
+        <% if user_signed_in? %>
+          <%= link_to('Edit profile', edit_user_registration_path) %>
+          <%= link_to('Log out', destroy_user_session_path, :method => :delete) %>
+        <% else %>
+          <%= link_to('Sign in', new_user_session_path) %>
+          <%= link_to('Register', new_user_registration_path) %>
+        <% end %>
+      </div>
+    </div>
+    <div id="middle">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+    <div id="footer">
+      © Vladimír Bača, 2014
+    </div>
+  </div>
 </body>
 </html>

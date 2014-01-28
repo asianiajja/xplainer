@@ -44,3 +44,7 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
+
+gem 'bcrypt-ruby', :require => 'bcrypt'
+
+gem 'tinymce-rails'

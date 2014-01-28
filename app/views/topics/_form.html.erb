@@ -1,10 +1,10 @@
-<%= form_for(@lecture) do |f| %>
-  <% if @lecture.errors.any? %>
+<%= form_for(@topic) do |f| %>
+  <% if @topic.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@lecture.errors.count, "error") %> prohibited this lecture from being saved:</h2>
+      <h2><%= pluralize(@topic.errors.count, "error") %> prohibited this topic from being saved:</h2>
 
       <ul>
-      <% @lecture.errors.full_messages.each do |msg| %>
+      <% @topic.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -15,12 +15,12 @@
     <%= f.label "Session name" %><br>
     <%= f.text_field :name %>
   </div>
-  <%
-  #<div class="password">
-   # <%= f.label "Password (optional)" <br>
-    #<%= f.password_field :password 
-  #</div>
-  %>
+  
+  <div class="password">
+    <%= f.label "Password (optional)" %><br>
+    <%= f.password_field :password %>
+  </div>
+  
   <div class="field">
     <%= f.label :public %>
     <%= f.check_box :public %>

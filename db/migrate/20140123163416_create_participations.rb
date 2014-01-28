@@ -4,6 +4,7 @@ class CreateParticipations < ActiveRecord::Migration
       t.integer :user_id, :null => false
       t.integer :lecture_id, :null => false
       t.boolean :online, :null => false, :default => false
+      t.boolean :creator, :null =>false, :default => false
       t.timestamps
     end
   end

@@ -1,0 +1,52 @@
+<script>
+function doUpdate() {
+	<% if @topic.editor.id == current_user.id %>
+	tinyMCE.triggerSave();
+	$('form#edit_topic').submit();
+	<% else %>
+      $.ajax({
+        type: "GET",
+        url: "/topics/<%=@topic.id %>",
+        dataType: "script"
+      });
+	<% end %>
+}
+setInterval(function(){doUpdate()}, 3000);
+</script>
+<p id="notice"><%= notice %></p>
+<h2><%= @topic.name %></h2>
+<div id="explain">
+<div id="board">
+	<% if @topic.editor.id == current_user.id %>
+	<%= tinymce_assets %>
+		<%= form_for(@topic, :as => :topic, url: url_for(:action => 'explain'), remote: true) do |f| %>
+			<div class="field">
+			 <%= f.text_area :content, size: '85x26', :class => "tinymce" %>
+			 <%= tinymce %>
+			</div>
+	  		<div class="actions" style="display:none;">
+    		<%= f.submit "Save" %>
+  			</div>
+		<% end %>
+	<% else %>
+		<%= render 'board' %>
+	<% end %>
+
+</div>
+<div id="interaction">
+	<div id="c_list">
+	<%= render 'comments' %>
+	</div>
+	<p>
+	<%= form_for(Comment.new, as: :comment, url: url_for(:action => 'comment'), remote: true) do |f| %>
+	  <div class="field">
+	    <%= f.label "Add a comment/a question:" %><br>
+	    <%= f.text_area :content, size: '20x4' %>
+	  </div>
+	    <div class="actions">
+    		<%= f.submit "Add" %>
+  		</div>
+	<% end %>
+	</p>
+</div>
+</div>

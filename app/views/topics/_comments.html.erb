@@ -1,0 +1,3 @@
+<% @topic.comments.each do |comment| %>
+	<div><span class="author_name"><%= comment.user.name %>: </span><%= comment.content %></div>
+<% end %>
